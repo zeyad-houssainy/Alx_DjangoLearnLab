@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Click Learning\Desktop\Alx_DjangoLearnLab\django-models\venv
+set VIRTUAL_ENV=C:\Users\Click Learning\Desktop\Alx_DjangoLearnLab\advanced_features_and_security\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
