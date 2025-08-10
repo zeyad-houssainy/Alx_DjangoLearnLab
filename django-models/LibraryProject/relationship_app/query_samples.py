@@ -33,9 +33,8 @@ def query_books_in_library(library_name):
 
 
 # Query 3: Retrieve the librarian for a library
-def query_librarian_for_library():
+def query_librarian_for_library(library_name):
     """Retrieve the librarian for a library"""
-    library_name = "Central Library"  # Replace with actual library name
     
     try:
         library = Library.objects.get(name=library_name)

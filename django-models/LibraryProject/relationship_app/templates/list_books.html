@@ -1,0 +1,212 @@
+<!-- list_books.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Books Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .book-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .book-card:hover::before {
+            opacity: 1;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-author::before {
+            content: "✍️ ";
+            margin-right: 5px;
+        }
+
+        .no-books {
+            text-align: center;
+            padding: 60px 40px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #6c757d;
+        }
+
+        .no-books h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        .no-books p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .stats h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .stats .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Library Collection</h1>
+            <p>Explore our amazing collection of books</p>
+        </div>
+        
+        <div class="content">
+            {% if books %}
+                <div class="books-grid">
+                    {% for book in books %}
+                    <div class="book-card">
+                        <div class="book-title">{{ book.title }}</div>
+                        <div class="book-author">{{ book.author.name }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="stats">
+                    <h3>Total Books in Collection</h3>
+                    <span class="number">{{ books|length }}</span>
+                </div>
+            {% else %}
+                <div class="no-books">
+                    <h3>📖 No Books Available</h3>
+                    <p>Our library collection is currently empty.<br>
+                    Please add some books through the admin panel to get started!</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Library Management System | Built with Django</p>
+        </div>
+    </div>
+</body>
+</html>
