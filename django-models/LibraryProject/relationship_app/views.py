@@ -10,15 +10,18 @@ from .models import Book, Author, Library, Librarian
 
 def list_books(request):
     """View that lists all books using HTML template"""
-    books = Book.objects.select_related('author').all()
+    # Use select_related to optimize database queries by fetching author data in one query
+    books = Book.objects.all()
     context = {'books': books}
-    return render(request, 'list_books.html', context)
+    # Updated template path to be consistent with directory structure
+    return render(request, 'relationship_app/list_books.html', context)
 
 
 # displays details for a specific library, listing all books available in that library.
 class LibraryDetailView(DetailView):
     model = Library
-    template_name = 'library_detail.html'
+    # Updated template path to be consistent with list_books view
+    template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
 
 
